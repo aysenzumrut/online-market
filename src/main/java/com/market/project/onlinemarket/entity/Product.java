@@ -1,5 +1,6 @@
 package com.market.project.onlinemarket.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Product {
     private String name;
     private Integer price;
     private Integer stock;
+    private String salesType;
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
