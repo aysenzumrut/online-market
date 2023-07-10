@@ -56,16 +56,16 @@ public class ProductSpecification implements Specification<Product> {
                 return criteriaBuilder.like(root.get(searchCriteria.getFieldName()), "%" + strToSearch);
             }
             case CONTAINS -> {
-                return criteriaBuilder.like(root.get(searchCriteria.getFieldName()), "%" + strToSearch +"%");
+                return criteriaBuilder.like(root.get(searchCriteria.getFieldName()), "%" + strToSearch + "%");
             }
             case LIST_IN -> {
                 List<String> tempList;
-                tempList=Arrays.asList(searchCriteria.getValue().toString().split(","));
+                tempList = Arrays.asList(searchCriteria.getValue().toString().split(","));
                 return root.get(searchCriteria.getFieldName()).in(tempList);
             }
             case LIST_NOT_IN -> {
                 List<String> tempList;
-                tempList=Arrays.asList(searchCriteria.getValue().toString().split(","));
+                tempList = Arrays.asList(searchCriteria.getValue().toString().split(","));
                 return criteriaBuilder.not(root.get(searchCriteria.getFieldName()).in(tempList));
             }
             case NULL -> {
