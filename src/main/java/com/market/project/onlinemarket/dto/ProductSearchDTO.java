@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProjectSearchDTO {
+public class ProductSearchDTO {
     private List<SearchCriteria> searchCriteriaList;
     private String dataOption;
 }

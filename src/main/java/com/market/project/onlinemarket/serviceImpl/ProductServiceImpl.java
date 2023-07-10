@@ -4,6 +4,7 @@ import com.market.project.onlinemarket.entity.Product;
 import com.market.project.onlinemarket.repository.ProductRepository;
 import com.market.project.onlinemarket.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,5 +36,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(Long productId) {
         return repository.findById(productId).orElse(null);
+    }
+
+    @Override
+    public List<Product> getByDynamicCriteria(Specification<Product> specification) {
+        return repository.findAll(specification);
     }
 }

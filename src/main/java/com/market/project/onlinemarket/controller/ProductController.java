@@ -1,5 +1,8 @@
 package com.market.project.onlinemarket.controller;
 
+import com.market.project.onlinemarket.builder.ProductSpecificationBuilder;
+import com.market.project.onlinemarket.dto.ProductSearchDTO;
+import com.market.project.onlinemarket.dto.SearchCriteria;
 import com.market.project.onlinemarket.entity.Product;
 import com.market.project.onlinemarket.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,21 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The Product is Not Found!");
         }
         return ResponseEntity.status(HttpStatus.OK).body("The Product is Deleted.");
+    }
+
+    @PostMapping("/search-product")
+    public List<Product> getByDynamicCriteria(@RequestBody ProductSearchDTO productSearchDTO) {
+        ProductSpecificationBuilder builder = new ProductSpecificationBuilder();
+        List<SearchCriteria> fieldList = productSearchDTO.getSearchCriteriaList();
+        if (fieldList != null) {
+            fieldList.forEach(
+                    searchCriteria -> {
+                        searchCriteria.setDataOption(productSearchDTO.getDataOption());
+                        builder.with(searchCriteria);
+                    }
+            );
+        }
+        return service.getByDynamicCriteria(builder.build());
     }
 
 }
