@@ -6,11 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerController {
     @Autowired
     CustomerService service;
+
+    @GetMapping("/get-all")
+    public List<Customer> getAll(){
+        return service.getAll();
+    }
 
     @PutMapping("/save-or-update")
     public Customer saveOrUpdate(@RequestBody Customer customer) {
