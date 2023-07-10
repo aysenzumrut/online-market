@@ -1,5 +1,6 @@
 package com.market.project.onlinemarket.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,13 +15,14 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer{
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private BigDecimal budget;
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name = "customer_product",
             joinColumns = @JoinColumn(name = "customer_id"),

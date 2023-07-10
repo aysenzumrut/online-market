@@ -15,6 +15,7 @@ import java.util.Optional;
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepository repository;
+
     @Override
     public List<Category> getAllCategories() {
         return repository.findAll();
@@ -27,17 +28,17 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteCategory(Long id) {
-        Optional<Category> categoryControl=repository.findById(id);
-        if (categoryControl.isPresent()){
+        Optional<Category> categoryControl = repository.findById(id);
+        if (categoryControl.isPresent()) {
             repository.deleteById(id);
-        }else
+        } else
             throw new RuntimeException();
     }
 
     @Override
     public List<Product> getProductsByCategoryId(Long categoryId) {
-        Category category=repository.findById(categoryId).orElse(null);
-        if (category==null){
+        Category category = repository.findById(categoryId).orElse(null);
+        if (category == null) {
             throw new NotFoundException("Category is not found!");
         }
         return category.getProductList();

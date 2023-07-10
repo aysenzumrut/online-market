@@ -31,4 +31,9 @@ public class ProductServiceImpl implements ProductService {
             repository.deleteById(id);
         } else throw new RuntimeException();
     }
+
+    @Override
+    public Product getProductById(Long productId) {
+        return repository.findById(productId).orElse(null);
+    }
 }
